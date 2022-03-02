@@ -4,13 +4,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="PHP篇, ICE">
-    <meta name="description" content="函数serialize（）:序列化
-unserialize（）:反序列化
-Public：在本类内部，外部类，子类都可以访问
-Protect：只有本类或子类或父类中可以访问
-Private：只有本类内部可以访问
-Private分析：priva">
+    <meta name="keywords" content="C, ICE">
+    <meta name="description" content="均在本地模拟，请不要用于非法途径
+先了解一下dns协议，当然dns也能做隐藏隧道，，，后续写上
+DNS协议是用来将域名转换为IP地址（也可以将IP地址转换为相应的域名地址）
+dns劫持：实验环境：Windows10(靶机) 192.168.">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -22,7 +20,7 @@ Private分析：priva">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>PHP篇 | ICE</title>
+    <title>C | ICE</title>
     <link rel="icon" type="image/png" href="/NebuIce.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/NebuIce.github.io/libs/awesome/css/all.min.css">
@@ -314,12 +312,12 @@ Private分析：priva">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/NebuIce.github.io/medias/featureimages/23.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/NebuIce.github.io/medias/featureimages/19.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">PHP篇</h1>
+                    <h1 class="description center-align post-title">C</h1>
                 </div>
             </div>
         </div>
@@ -433,13 +431,9 @@ Private分析：priva">
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/NebuIce.github.io/tags/PHP/">
-                                <span class="chip bg-color">PHP</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">No tag</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -472,233 +466,33 @@ Private分析：priva">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><p>serialize（）:序列化</p>
-<p>unserialize（）:反序列化</p>
-<p>Public：在本类内部，外部类，子类都可以访问</p>
-<p>Protect：只有本类或子类或父类中可以访问</p>
-<p>Private：只有本类内部可以访问</p>
-<p>Private分析：private属性序列化时格式为%00类名%00，%00占一个字节</p>
-<p>Protectde分析：protected属性序列化时格式为%00***%00，**&#x2F;&#x2F;（*为一个字节，%00为一个字节）</p>
-<p>当访问和设置未定义和已经定义但关键字为‘protect’，‘private’时会自动调用__get(),__set()函数同时__get()返回了一个函数</p>
-<p>__construct()  当一个对象创建时被调用，</p>
-<p>__destruct()  当一个对象销毁时被调用，</p>
-<p>__toString  当一个对象被当作一个字符串被调用。</p>
-<p>__wakeup()  使用unserialize时触发</p>
-<p>__sleep()   使用serialize时触发</p>
-<p>__destruct()   对象被销毁时触发（会触发两次，摧毁实例化出的对象和反序列化的对象）</p>
-<p>__call()   在对象上下文中调用不可访问的方法时触发</p>
-<p>__callStatic()   在静态上下文中调用不可访问的方法时触发</p>
-<p>__get()   用于从不可访问的属性读取数据</p>
-<p>__set()   用于将数据写入不可访问的属性</p>
-<p>__isset()   在不可访问的属性上调用isset()或empty()触发</p>
-<p>__unset()   在不可访问的属性上使用unset()时触发</p>
-<p>__invoke()  当脚本尝试将对象调用为函数时触发</p>
+                <p>均在本地模拟，请不要用于非法途径</p>
+<p>先了解一下dns协议，当然dns也能做隐藏隧道，，，后续写上</p>
+<p><strong>DNS协议是用来将域名转换为IP地址（也可以将IP地址转换为相应的域名地址）</strong></p>
+<h1 id="dns劫持："><a href="#dns劫持：" class="headerlink" title="dns劫持："></a>dns劫持：</h1><h4 id="实验环境："><a href="#实验环境：" class="headerlink" title="实验环境："></a>实验环境：</h4><p>Windows10(靶机) 192.168.64.139，kali Linux(攻击机) 192.168.64.133</p>
+<p>均为NAT模式，保证在同一个网关，能够通信，可以用ping测试(windows默认ping四次，Linux默认一直ping，可以加一个参数  -c  来指定ping的次数)</p>
+<h4 id="准备："><a href="#准备：" class="headerlink" title="准备："></a>准备：</h4><p>所用工具kali 下的ettercap，需要在ettercap.dns文件中加入以下数据(在&#x2F;etc&#x2F;ettercap&#x2F;ettercap.dns中)：</p>
+<p>###################################################<br>#microsoft sucks ;)<br>#redirect it to <a target="_blank" rel="noopener" href="http://www.linux.org/">www.linux.org</a><br>#</p>
+<p>microsoft.com     A 107.170.40.56<br>*.microsoft.com   A 107.170.40.56<br><a target="_blank" rel="noopener" href="http://www.microsoft.com/">www.microsoft.com</a> PTR 107.170.40.56      # wildcards in PTR are not allowed</p>
+<p>*A 192.168.64.133</p>
+<p>*PTR  192.168.64.133</p>
+<p>##################################################</p>
+<p>ps：下面的*代表所有解析到目标IP</p>
 <hr>
-<p>__wakeup()绕过：当反序列化字符串中，表示属性个数的值大于真实属性个数时，会绕过wakeup 函数的执行（PHP5&lt;5.6.25，PHP7&lt;7.0.10）</p>
-<h1 id="session反序列化"><a href="#session反序列化" class="headerlink" title="session反序列化"></a>session反序列化</h1><p>Session起作用：当第一次访问网站时，Seesion_start()函数就会创建一个唯一的Session ID，并自动通过HTTP的响应头，将这个Session ID保存到客户端Cookie中。同时，也在服务器端创建一个以Session ID命名的文件，用于保存这个用户的会话信息。当同一个用户再次访问这个网站时，也会自动通过HTTP的请求头将Cookie中保存的Seesion ID再携带过来，这时Session_start()函数就不会再去分配一个新的Session ID，而是在服务器的硬盘中去寻找和这个Session ID同名的Session文件，将这之前为这个用户保存的会话信息读出，在当前脚本中应用，达到跟踪这个用户的目的。</p>
-<p>Php.ini中的session配置：</p>
-<table>
-<thead>
-<tr>
-<th>Directive</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>session.save_handler</td>
-<td>session保存形式。默认为files</td>
-</tr>
-<tr>
-<td>session.save_path</td>
-<td>session保存路径。</td>
-</tr>
-<tr>
-<td>session.serialize_handler</td>
-<td>session序列化存储所用处理器。默认为php。</td>
-</tr>
-<tr>
-<td>session.upload_progress.cleanup</td>
-<td>一旦读取了所有POST数据，立即清除进度信息。默认开启 &#x2F;&#x2F;若漏洞存在,此项应该为off</td>
-</tr>
-<tr>
-<td>session.upload_progress.enabled</td>
-<td>将上传文件的进度信息存在session中。默认开启。</td>
-</tr>
-</tbody></table>
-<p>session.auto_start boolen–指定会话模块是否在请求开始时启动一个会话默认为0不启动</p>
-<p>session.serialize_handler string–定义用来序列化&#x2F;反序列化的处理器名字。默认使用php</p>
-<p>Php中session存储机制：由session.serialize_handler来定义引擎的，默认是以文件的方式存储，且存储的文件是由sess_sessionid来决定文件名的</p>
-<p> 处理器名称  存储格式<br> php ：键名 + 竖线 + 经过serialize()函数序列化处理的值<br> php_binary:键名的长度对应的 ASCII 字符+键名+经过serialize()函数序列化处理的值<br> php_serialize(php&gt;5.5.4)  ：经过serialize()函数序列化处理的数组 </p>
-<p>利用：php处理器和php_serialize处理器这两个处理器生成的序列化格式本身是没有问题的，但是如果这两个处理器混合起来用，就会造成危害。形成的原理就是在用session.serialize_handler&#x3D;php_serialize存储的字符可以引入|，再用session.serialize_handler &#x3D; php格式取出$_SESSION的值时，|会被当成键值对的分隔符，在特定的地方会造成反序列化漏洞</p>
-<p>利用条件：</p>
-<ul>
-<li>session.serialize_handler                        处理器不相同</li>
-<li>session.upload_progress.cleanup         off</li>
-<li>session.upload_progress.enabled         on</li>
-</ul>
+<h4 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h4><p>打开ettercap，网卡就选eth0</p>
+<p>hosts里面选scan for hosts扫描主机，然后hosts list列出存活主机</p>
+<p>把攻击的IP添加到target1，网关的加入target2</p>
+<p>选择ARP poisoning..那个，默认，ok，具体在哪里自己摸索一下，版本不一样位置不一样</p>
+<p>在plugins选择manage plugins，选择dns_spoof</p>
+<p>然后就开始攻击了</p>
+<p>然后ping百度会发现解析的是kali的ip</p>
+<p>小知识：如果有一个网站突然不能访问了或者不能访问外网可能是运营商劫持了你的dns，试试在本地修改hosts文件</p>
 <hr>
-<p>例如：</p>
-<p>&#x2F;&#x2F; 1.php<br>&lt;?php<br>ini_set(‘session.serialize_handler’, ‘php_serialize’);<br>session_start();<br>$_SESSION[‘y4’] &#x3D; $_GET[‘a’];<br>var_dump($_SESSION);<br>&#x2F;&#x2F;2.php<br>&lt;?php<br>ini_set(‘session.serialize_handler’, ‘php’);<br>session_start();<br>class test{<br>    public $name;<br>    function __wakeup(){<br>        echo $this-&gt;name;<br>    }<br>}</p>
-<p>由于<code>1.php</code>是使用<code>php_serialize</code>引擎处理，因此只会把<code>&#39;|&#39;</code>当做一个正常的字符。然后访问<code>2.php</code>，由于用的是<code>php</code>引擎，因此遇到<code>&#39;|&#39;</code>时会将之看做键名与值的分割符，从而造成了歧义，导致其在解析session文件时直接对<code>&#39;|&#39;</code>后的值进行反序列化处理</p>
-<p>对照实例看：</p>
-<h2 id="phar反序列化"><a href="#phar反序列化" class="headerlink" title="phar反序列化"></a>phar反序列化</h2><p>phar文件本质上是一种压缩文件，会以序列化的形式存储用户自定义的meta-data。当受影响的文件操作函数调用phar文件时，会自动反序列化meta-data内的内容</p>
-<h5 id="phar文件：PHAR（PHP归档）文件是一种打包格式，通过将许多PHP代码文件和其他资源（例如图像，样式表等）捆绑到一个归档文件中来实现应用程序和库的分发"><a href="#phar文件：PHAR（PHP归档）文件是一种打包格式，通过将许多PHP代码文件和其他资源（例如图像，样式表等）捆绑到一个归档文件中来实现应用程序和库的分发" class="headerlink" title="phar文件：PHAR（PHP归档）文件是一种打包格式，通过将许多PHP代码文件和其他资源（例如图像，样式表等）捆绑到一个归档文件中来实现应用程序和库的分发"></a>phar文件：PHAR（PHP归档）文件是一种打包格式，通过将许多PHP代码文件和其他资源（例如图像，样式表等）捆绑到一个归档文件中来实现应用程序和库的分发</h5><p>php通过用户定义和内置的“流包装器”实现复杂的文件处理功能。内置包装器可用于文件系统函数，如(fopen(),copy(),file_exists()和filesize()。 phar:&#x2F;&#x2F;就是一种内置的流包装器</p>
-<hr>
-<p><strong>php一些常见的流包装器如下</strong></p>
-<p>file:&#x2F;&#x2F; — 访问本地文件系统，在用文件系统函数时默认就使用该包装器<br>http:&#x2F;&#x2F; — 访问 HTTP(s) 网址<br>ftp:&#x2F;&#x2F; — 访问 FTP(s) URLs<br>php:&#x2F;&#x2F; — 访问各个输入&#x2F;输出流（I&#x2F;O streams）<br>zlib:&#x2F;&#x2F; — 压缩流<br>data:&#x2F;&#x2F; — 数据（RFC 2397）<br>glob:&#x2F;&#x2F; — 查找匹配的文件路径模式<br>phar:&#x2F;&#x2F; — PHP 归档<br>ssh2:&#x2F;&#x2F; — Secure Shell 2<br>rar:&#x2F;&#x2F; — RAR<br>ogg:&#x2F;&#x2F; — 音频流<br>expect:&#x2F;&#x2F; — 处理交互式的流</p>
-<hr>
-<p><strong>phar文件结构</strong></p>
-<p>stub:phar文件的标志，必须以 xxx __HALT_COMPILER();?&gt; 结尾，否则无法识别。xxx可以为自定义内容。<br>manifest:phar文件本质上是一种压缩文件，其中每个被压缩文件的权限、属性等信息都放在这部分。这部分还会以序列化的形式存储用户自定义的meta-data，这是漏洞利用最核心的地方。<br>content:被压缩文件的内容<br>signature (可空):签名，放在末尾</p>
-<p><strong>生成phar文件：</strong></p>
-<?php
-    class Test {
-    }
-
-    @unlink("phar.phar");
-    $phar = new Phar("phar.phar"); //后缀名必须为phar
-    $phar->startBuffering();
-    $phar->setStub("<?php __HALT_COMPILER(); ?><p>“); &#x2F;&#x2F;设置stub<br>    $o &#x3D; new Test();<br>    $phar-&gt;setMetadata($o); &#x2F;&#x2F;将自定义的meta-data存入manifest<br>    $phar-&gt;addFromString(“test.txt”, “test”); &#x2F;&#x2F;添加要压缩的文件<br>    &#x2F;&#x2F;签名自动计算<br>    $phar-&gt;stopBuffering();</p>
-<p>?&gt;</p>
-<hr>
-<p>利用条件：</p>
-<ol>
-<li>phar文件要能够上传到服务器端。</li>
-<li>要有可用的魔术方法作为“跳板”。</li>
-<li>文件操作函数的参数可控，且<code>:</code>、<code>/</code>、<code>phar</code>等特殊字符没有被过滤。</li>
-</ol>
-<hr>
-<p><strong>受影响的函数</strong></p>
-<p>&#x2F;&#x2F;exif<br>exif_thumbnail<br>exif_imagetype</p>
-<p>&#x2F;&#x2F;gd<br>imageloadfont<br>imagecreatefrom***系列函数</p>
-<p>&#x2F;&#x2F;hash</p>
-<p>hash_hmac_file<br>hash_file<br>hash_update_file<br>md5_file<br>sha1_file</p>
-<p>&#x2F;&#x2F; file&#x2F;url<br>get_meta_tags<br>get_headers</p>
-<p>&#x2F;&#x2F;standard<br>getimagesize<br>getimagesizefromstring</p>
-<p>&#x2F;&#x2F; zip<br>$zip &#x3D; new ZipArchive();<br>$res &#x3D; $zip-&gt;open(‘c.zip’);<br>$zip-&gt;extractTo(‘phar:&#x2F;&#x2F;test.phar&#x2F;test’);<br>&#x2F;&#x2F; Bzip &#x2F; Gzip 当环境限制了phar不能出现在前面的字符里。可以使用compress.bzip2:&#x2F;&#x2F;和compress.zlib:&#x2F;&#x2F;绕过<br>$z &#x3D; ‘compress.bzip2:&#x2F;&#x2F;phar:&#x2F;&#x2F;&#x2F;home&#x2F;sx&#x2F;test.phar&#x2F;test.txt’;<br>$z &#x3D; ‘compress.zlib:&#x2F;&#x2F;phar:&#x2F;&#x2F;&#x2F;home&#x2F;sx&#x2F;test.phar&#x2F;test.txt’;</p>
-<p>&#x2F;&#x2F;配合其他协议：(SUCTF)</p>
-<p>&#x2F;&#x2F;当环境限制了phar不能出现在前面的字符里，还可以配合其他协议进行利用。<br>&#x2F;&#x2F;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;phar:&#x2F;&#x2F;phar.phar</p>
-<p>&#x2F;&#x2F;Postgres pgsqlCopyToFile和pg_trace同样也是能使用的，需要开启phar的写功能。<br><?php
-    $pdo = new PDO(sprintf("pgsql:host=%s;dbname=%s;user=%s;password=%s", "127.0.0.1", "postgres", "sx", "123456"));
-    @$pdo->pgsqlCopyFromFile('aa', 'phar://phar.phar/aa');
-?></p>
-<p>&#x2F;&#x2F; Mysql<br>&#x2F;&#x2F;LOAD DATA LOCAL INFILE也会触发这个php_stream_open_wrapper<br>&#x2F;&#x2F;配置一下mysqld:<br>&#x2F;&#x2F;[mysqld]<br>&#x2F;&#x2F;local-infile&#x3D;1<br>&#x2F;&#x2F;secure_file_priv&#x3D;””</p>
-<?php
-class A {
-    public $s = '';
-    public function __wakeup () {
-        system($this->s);
-    }
-}
-$m = mysqli_init();
-mysqli_options($m, MYSQLI_OPT_LOCAL_INFILE, true);
-$s = mysqli_real_connect($m, 'localhost', 'root', 'root', 'testtable', 3306);
-$p = mysqli_query($m, 'LOAD DATA LOCAL INFILE \'phar://test.phar/test\' INTO TABLE a  LINES TERMINATED BY \'\r\n\'  IGNORE 1 LINES;');
-?>
-
-<h4 id="绕过："><a href="#绕过：" class="headerlink" title="绕过："></a>绕过：</h4><p>compress.bzip:&#x2F;&#x2F;phar:&#x2F;&#x2F;&#x2F;test.phar&#x2F;test.txt<br>compress.bzip2:&#x2F;&#x2F;phar:&#x2F;&#x2F;&#x2F;test.phar&#x2F;test.txt<br>compress.zlib:&#x2F;&#x2F;phar:&#x2F;&#x2F;&#x2F;home&#x2F;sx&#x2F;test.phar&#x2F;test.txt<br>php:&#x2F;&#x2F;filter&#x2F;resource&#x3D;phar:&#x2F;&#x2F;&#x2F;test.phar&#x2F;test.txt</p>
-<p>当环境限制了phar不能出现在前面的字符里，还可以配合其他协议进行利用。<br>php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;phar:&#x2F;&#x2F;phar.phar</p>
-<p>GIF格式验证可以通过在文件头部添加GIF89a绕过<br>1、$phar-&gt;setStub(“GIF89a”.”<?php __HALT_COMPILER(); ?>“); &#x2F;&#x2F;设置stub<br>2、生成一个phar.phar，修改后缀名为phar.gif</p>
-<h2 id="字符串逃逸"><a href="#字符串逃逸" class="headerlink" title="字符串逃逸"></a>字符串逃逸</h2><h4 id="过滤后字符变多"><a href="#过滤后字符变多" class="headerlink" title="过滤后字符变多"></a>过滤后字符变多</h4><p>a:2:{i:0:3:”maox”;i:1;s:6:”woaini”;}</p>
-<p>我们传入maoxxxxxxxxxxxxxxxxxxxx”;i:1;s:6:”woaini”;}<br>“;i:1;s:6:”woaini”;}这一部分一共二十个字符<br>由于一个x会被替换为两个，我们输入了一共20个x，现在是40个，多出来的20个x其实取代了我们的这二十个字符”;i:1;s:6:”woaini”;}，从而造成”;i:1;s:6:”woaini”;}的溢出，而”闭合了前串，使得我们的字符串成功逃逸，可以被反序列化</p>
-<h4 id="过滤后字符变少"><a href="#过滤后字符变少" class="headerlink" title="过滤后字符变少"></a>过滤后字符变少</h4><p>a:2{s:4:”name”;s:40:”xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx”;s:3:”age”;s:28:”11”;s:3:”age”;s:6:”woaini”;}</p>
-<p>由于前面是40个x所以导致少了20个字符，所以需要后面来补上，<code>&quot;;s:3:&quot;age&quot;;s:28:&quot;11</code>这一部分刚好20个，后面由于有<code>&quot;</code>闭合了前面因此后面的参数就可以由我们自定义执行了</p>
-<hr>
-<h1 id="原生类利用"><a href="#原生类利用" class="headerlink" title="原生类利用"></a>原生类利用</h1><p>php常见原生类：</p>
-<p>Error</p>
-<p>Exception</p>
-<p>SoapClient</p>
-<p>Directorylterator</p>
-<p>SimpleXMLElement</p>
-<h3 id="使用Error-x2F-Exception内置类"><a href="#使用Error-x2F-Exception内置类" class="headerlink" title="使用Error&#x2F;Exception内置类"></a>使用Error&#x2F;Exception内置类</h3><p>Error</p>
-<ul>
-<li><p>适用于php7版本</p>
-</li>
-<li><p>在开启报错的情况下</p>
-<p>在php7版本下内置了一个__tostring（）的方法</p>
-</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$a = new Error(&quot;&lt;script&gt;alert(&#x27;xss&#x27;)&lt;/script&gt;&quot;);  //形成xss</span><br></pre></td></tr></table></figure>
-
-
-
-<p>exception</p>
-<ul>
-<li><p>适用于php5、7版本</p>
-</li>
-<li><p>开启报错的情况下</p>
-<p>同理</p>
-</li>
-</ul>
-<h3 id="Error-类"><a href="#Error-类" class="headerlink" title="Error 类"></a>Error 类</h3><p><strong>Error</strong> 是所有PHP内部错误类的基类，该类是在PHP 7.0.0 中开始引入的。</p>
-<p><strong>类摘要：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Error implements Throwable &#123;</span><br><span class="line">    /* 属性 */</span><br><span class="line">    protected string $message ;</span><br><span class="line">    protected int $code ;</span><br><span class="line">    protected string $file ;</span><br><span class="line">    protected int $line ;</span><br><span class="line">    /* 方法 */</span><br><span class="line">    public __construct ( string $message = &quot;&quot; , int $code = 0 , Throwable $previous = null )</span><br><span class="line">    final public getMessage ( ) : string</span><br><span class="line">    final public getPrevious ( ) : Throwable</span><br><span class="line">    final public getCode ( ) : mixed</span><br><span class="line">    final public getFile ( ) : string</span><br><span class="line">    final public getLine ( ) : int</span><br><span class="line">    final public getTrace ( ) : array</span><br><span class="line">    final public getTraceAsString ( ) : string</span><br><span class="line">    public __toString ( ) : string</span><br><span class="line">    final private __clone ( ) : void</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>类属性：</strong></p>
-<ul>
-<li>message：错误消息内容</li>
-<li>code：错误代码</li>
-<li>file：抛出错误的文件名</li>
-<li>line：抛出错误在该文件中的行数</li>
-</ul>
-<p><strong>类方法：</strong></p>
-<ul>
-<li>Error::__construct— 初始化 error 对象</li>
-<li>Error::getMessage — 获取错误信息</li>
-<li>Error::getPrevious— 返回先前的 Throwable</li>
-<li>Error::getCode— 获取错误代码</li>
-<li>Error::getFile— 获取错误发生时的文件</li>
-<li>Error::getLine— 获取错误发生时的行号</li>
-<li>Error::getTrace— 获取调用栈（stack trace）</li>
-<li>Error::getTraceAsString — 获取字符串形式的调用栈（stack trace）</li>
-<li>Error::__toString — error 的字符串表达</li>
-<li>Error::__clone— 克隆 error</li>
-</ul>
-<h3 id="Exception-类"><a href="#Exception-类" class="headerlink" title="Exception 类"></a>Exception 类</h3><p><strong>Exception</strong> 是所有异常的基类，该类是在PHP 5.0.0 中开始引入的。</p>
-<p><strong>类摘要：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Exception &#123;</span><br><span class="line">    /* 属性 */</span><br><span class="line">    protected string $message ;</span><br><span class="line">    protected int $code ;</span><br><span class="line">    protected string $file ;</span><br><span class="line">    protected int $line ;</span><br><span class="line">    /* 方法 */</span><br><span class="line">    public __construct ( string $message = &quot;&quot; , int $code = 0 , Throwable $previous = null )</span><br><span class="line">    final public getMessage ( ) : string</span><br><span class="line">    final public getPrevious ( ) : Throwable</span><br><span class="line">    final public getCode ( ) : mixed</span><br><span class="line">    final public getFile ( ) : string</span><br><span class="line">    final public getLine ( ) : int</span><br><span class="line">    final public getTrace ( ) : array</span><br><span class="line">    final public getTraceAsString ( ) : string</span><br><span class="line">    public __toString ( ) : string</span><br><span class="line">    final private __clone ( ) : void</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>类属性：</strong></p>
-<ul>
-<li>message：异常消息内容</li>
-<li>code：异常代码</li>
-<li>file：抛出异常的文件名</li>
-<li>line：抛出异常在该文件中的行号</li>
-</ul>
-<p><strong>类方法：</strong></p>
-<ul>
-<li><p>Exception::__construct — 异常构造函数</p>
-</li>
-<li><p>Exception::getMessage— 获取异常消息内容</p>
-</li>
-<li><p>Exception::getPrevious— 返回异常链中的前一个异常</p>
-</li>
-<li><p>Exception::getCode— 获取异常代码</p>
-</li>
-<li><p>Exception::getFile— 创建异常时的程序文件名称</p>
-</li>
-<li><p>Exception::getLine— 获取创建的异常所在文件中的行号</p>
-</li>
-<li><p>Exception::getTrace— 获取异常追踪信息</p>
-</li>
-<li><p>Exception::getTraceAsString— 获取字符串类型的异常追踪信息</p>
-</li>
-<li><p>Exception::__toString — 将异常对象转换为字符串</p>
-<p>Exception::__clone— 异常克隆</p>
-</li>
-</ul>
-<h2 id="使用-SoapClient-类进行-SSRF"><a href="#使用-SoapClient-类进行-SSRF" class="headerlink" title="使用 SoapClient 类进行 SSRF"></a>使用 SoapClient 类进行 SSRF</h2><p>PHP 的内置类 SoapClient 是一个专门用来访问web服务的类，可以提供一个基于SOAP协议访问Web服务的 PHP 客户端。</p>
-<p>类摘要：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">SoapClient &#123;</span><br><span class="line">    /* 方法 */</span><br><span class="line">    public __construct ( string|null $wsdl , array $options = [] )</span><br><span class="line">    public __call ( string $name , array $args ) : mixed</span><br><span class="line">    public __doRequest ( string $request , string $location , string $action , int $version , bool $oneWay = false ) : string|null</span><br><span class="line">    public __getCookies ( ) : array</span><br><span class="line">    public __getFunctions ( ) : array|null</span><br><span class="line">    public __getLastRequest ( ) : string|null</span><br><span class="line">    public __getLastRequestHeaders ( ) : string|null</span><br><span class="line">    public __getLastResponse ( ) : string|null</span><br><span class="line">    public __getLastResponseHeaders ( ) : string|null</span><br><span class="line">    public __getTypes ( ) : array|null</span><br><span class="line">    public __setCookie ( string $name , string|null $value = null ) : void</span><br><span class="line">    public __setLocation ( string $location = &quot;&quot; ) : string|null</span><br><span class="line">    public __setSoapHeaders ( SoapHeader|array|null $headers = null ) : bool</span><br><span class="line">    public __soapCall ( string $name , array $args , array|null $options = null , SoapHeader|array|null $inputHeaders = null , array &amp;$outputHeaders = null ) : mixed</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>内置类有一个 <code>__call</code> 方法，当 <code>__call</code> 方法被触发后，它可以发送 HTTP 和 HTTPS 请求</p>
-<p>该类的构造函数如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public SoapClient :: SoapClient(mixed $wsdl [，array $options ])</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>第一个参数是用来指明是否是wsdl模式，将该值设为null则表示非wsdl模式。</li>
-<li>第二个参数为一个数组，如果在wsdl模式下，此参数可选；如果在非wsdl模式下，则必须设置location和uri选项，其中location是要将请求发送到的SOAP服务器的URL，而uri 是SOAP服务的目标命名空间。</li>
-</ul>
-<p>我们要提交的是POST数据 <code>Content-Type</code> 的值我们要设置为 <code>application/x-www-form-urlencoded</code>，这里如何修改 <code>Content-Type</code> 的值呢？由于 <code>Content-Type</code> 在 <code>User-Agent</code> 的下面，所以我们可以通过 <code>SoapClient</code> 来设置 <code>User-Agent</code> ，将原来的 <code>Content-Type</code> 挤下去，从而再插入一个新的 <code>Content-Type</code></p>
+<p>用法拓展，内网钓鱼：</p>
+<p>msf生成木马，让目标解析至自己搭建的服务器上，在服务器上搭建网站，提示下载升级浏览器插件，诱导下载生成的木马</p>
+<p>service apache2 start  &#x2F;&#x2F;启动apache服务器,记得开80端口</p>
+<p>cp test.exe &#x2F;var&#x2F;www&#x2F;html  &#x2F;&#x2F;把木马放在页面下</p>
+<p>能力有限，诱导下载升级浏览器插件的页面写不出来，，，也没有找到代码，后续补上，，，</p>
 
                 
             </div>
@@ -725,7 +519,7 @@ $p = mysqli_query($m, 'LOAD DATA LOCAL INFILE \'phar://test.phar/test\' INTO TAB
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://nebulce.github.io/NebuIce.github.io/NebuIce.github.io/2022/03/02/PHP/">https://nebulce.github.io/NebuIce.github.io/NebuIce.github.io/2022/03/02/PHP/</a>
+                    <a href="https://nebulce.github.io/NebuIce.github.io/NebuIce.github.io/2022/03/02/C/">https://nebulce.github.io/NebuIce.github.io/NebuIce.github.io/2022/03/02/C/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -762,11 +556,7 @@ $p = mysqli_query($m, 'LOAD DATA LOCAL INFILE \'phar://test.phar/test\' INTO TAB
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/NebuIce.github.io/tags/PHP/">
-                                    <span class="chip bg-color">PHP</span>
-                                </a>
-                            
+                            <span class="chip bg-color">No tag</span>
                         </div>
                     
                 </div>
@@ -938,9 +728,10 @@ $p = mysqli_query($m, 'LOAD DATA LOCAL INFILE \'phar://test.phar/test\' INTO TAB
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
             <div class="card">
                 <a href="/NebuIce.github.io/2022/03/02/C/">
                     <div class="card-image">
@@ -958,9 +749,9 @@ $p = mysqli_query($m, 'LOAD DATA LOCAL INFILE \'phar://test.phar/test\' INTO TAB
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-02
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-02
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -969,6 +760,7 @@ $p = mysqli_query($m, 'LOAD DATA LOCAL INFILE \'phar://test.phar/test\' INTO TAB
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -976,7 +768,7 @@ $p = mysqli_query($m, 'LOAD DATA LOCAL INFILE \'phar://test.phar/test\' INTO TAB
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                Current&nbsp;<i class="far fa-dot-circle"></i>
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="/NebuIce.github.io/2022/03/02/PHP/">
@@ -1006,7 +798,6 @@ $p = mysqli_query($m, 'LOAD DATA LOCAL INFILE \'phar://test.phar/test\' INTO TAB
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
