@@ -4,11 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="C, ICE">
-    <meta name="description" content="均在本地模拟，请不要用于非法途径
-先了解一下dns协议，当然dns也能做隐藏隧道，，，后续写上
-DNS协议是用来将域名转换为IP地址（也可以将IP地址转换为相应的域名地址）
-dns劫持：实验环境：Windows10(靶机) 192.168.">
+    <meta name="keywords" content="内网常见词汇学习, ICE">
+    <meta name="description" content="SAMSAM(安全账户管理器)，是用来存储Windows操作系统密码的数据库文件，为了避免明文密码泄露，SAM文件中保存的是明文密码结果一系列算法处理过的Hash值，被保存到Hash分为LM Hash，NTLMHash，在用户在本地或远程登">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +17,7 @@ dns劫持：实验环境：Windows10(靶机) 192.168.">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>C | ICE</title>
+    <title>内网常见词汇学习 | ICE</title>
     <link rel="icon" type="image/png" href="/NebuIce.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/NebuIce.github.io/libs/awesome/css/all.min.css">
@@ -312,12 +309,12 @@ dns劫持：实验环境：Windows10(靶机) 192.168.">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/NebuIce.github.io/medias/featureimages/19.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/NebuIce.github.io/medias/featureimages/23.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">C</h1>
+                    <h1 class="description center-align post-title">内网常见词汇学习</h1>
                 </div>
             </div>
         </div>
@@ -445,7 +442,7 @@ dns劫持：实验环境：Windows10(靶机) 192.168.">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2022-03-02
+                    2022-03-03
                 </div>
                 
 
@@ -466,33 +463,148 @@ dns劫持：实验环境：Windows10(靶机) 192.168.">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>均在本地模拟，请不要用于非法途径</p>
-<p>先了解一下dns协议，当然dns也能做隐藏隧道，，，后续写上</p>
-<p><strong>DNS协议是用来将域名转换为IP地址（也可以将IP地址转换为相应的域名地址）</strong></p>
-<h1 id="dns劫持："><a href="#dns劫持：" class="headerlink" title="dns劫持："></a>dns劫持：</h1><h4 id="实验环境："><a href="#实验环境：" class="headerlink" title="实验环境："></a>实验环境：</h4><p>Windows10(靶机) 192.168.64.139，kali Linux(攻击机) 192.168.64.133</p>
-<p>均为NAT模式，保证在同一个网关，能够通信，可以用ping测试(windows默认ping四次，Linux默认一直ping，可以加一个参数  -c  来指定ping的次数)</p>
-<h4 id="准备："><a href="#准备：" class="headerlink" title="准备："></a>准备：</h4><p>所用工具kali 下的ettercap，需要在ettercap.dns文件中加入以下数据(在&#x2F;etc&#x2F;ettercap&#x2F;ettercap.dns中)：</p>
-<p>###################################################<br>#microsoft sucks ;)<br>#redirect it to <a target="_blank" rel="noopener" href="http://www.linux.org/">www.linux.org</a><br>#</p>
-<p>microsoft.com     A 107.170.40.56<br>*.microsoft.com   A 107.170.40.56<br><a target="_blank" rel="noopener" href="http://www.microsoft.com/">www.microsoft.com</a> PTR 107.170.40.56      # wildcards in PTR are not allowed</p>
-<p>*A 192.168.64.133</p>
-<p>*PTR  192.168.64.133</p>
-<p>##################################################</p>
-<p>ps：下面的*代表所有解析到目标IP</p>
-<hr>
-<h4 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h4><p>打开ettercap，网卡就选eth0</p>
-<p>hosts里面选scan for hosts扫描主机，然后hosts list列出存活主机</p>
-<p>把攻击的IP添加到target1，网关的加入target2</p>
-<p>选择ARP poisoning..那个，默认，ok，具体在哪里自己摸索一下，版本不一样位置不一样</p>
-<p>在plugins选择manage plugins，选择dns_spoof</p>
-<p>然后就开始攻击了</p>
-<p>然后ping百度会发现解析的是kali的ip</p>
-<p>小知识：如果有一个网站突然不能访问了或者不能访问外网可能是运营商劫持了你的dns，试试在本地修改hosts文件</p>
-<hr>
-<p>用法拓展，内网钓鱼：</p>
-<p>msf生成木马，让目标解析至自己搭建的服务器上，在服务器上搭建网站，提示下载升级浏览器插件，诱导下载生成的木马</p>
-<p>service apache2 start  &#x2F;&#x2F;启动apache服务器,记得开80端口</p>
-<p>cp test.exe &#x2F;var&#x2F;www&#x2F;html  &#x2F;&#x2F;把木马放在页面下</p>
-<p>能力有限，诱导下载升级浏览器插件的页面写不出来，，，也没有找到代码，后续补上，，，</p>
+                <h1 id="SAM"><a href="#SAM" class="headerlink" title="SAM"></a>SAM</h1><p>SAM(安全账户管理器)，是用来存储Windows操作系统密码的数据库文件，为了避免明文密码泄露，SAM文件中保存的是明文密码结果一系列算法处理过的Hash值，被保存到Hash分为LM Hash，NTLMHash，在用户在本地或远程登陆系统时会将Hash值域SAM文件中保存的Hash值进行对比，在后期的Windows系统中，SAM文件中被保存的密码Hash、都被密钥SYSKEY加密</p>
+<p>SAM文件在磁盘中的位置在C:\windows\system32\config\sam SAM文件在Windows系统启动后被锁定，无法进行移动和复制</p>
+<h1 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a>Hash</h1><p>Windows系统为了保证用户明文密码不会被泄露，将明文密码转换位Hash值进行身份验证，被保存在SAM或ntds.dit中</p>
+<h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>LM Hash 在早期Windows系统中将明文密码转换位LM Hash保存在SAM中，因为LM　Ｈash使用DES</p>
+<p>加密，密钥为硬编码，算法存在缺陷，被弃用，可自行开启</p>
+<p>NTML Hash，LM Hash被弃用，NTML Hash被用来进行Windows本地及远程身份验证的凭据，长度为32bit，又数字和字母组成</p>
+<h4 id="产生"><a href="#产生" class="headerlink" title="产生"></a>产生</h4><p>1.LM Hash：</p>
+<p>admin1-ADMIN1(将密码转换为大写字母 )<br> ADMIN1-41444d494e31(16进制转换)<br> 41444d494e31-41444d494e310000000000000000(密码未到7位，在末尾补0，填充为14个字符，补16个0)<br> 41444d494e3100 00000000000000(分为两组，各转换为2进制)<br> 1000001010001000100110101001001010011100011000100000000(长度不足56bit，左侧补0)<br> 01000001010001000100110101001001010011100011000100000000(再分为7bit一组，后加0)<br> 0100000 0<br> 1010001 0<br> 0001001 0<br> 1010100 0<br> 1001010 0<br> 0111000 0<br> 1100010 0<br> 0000000 0<br> 0100000010100010000100101010100010010100011100001100010000000000-40A212A89470C400（转换为16进制）<br> 0000000000000000</p>
+<p>将上面两组数字des加密</p>
+<p>KGS!@#$%-4b47532140232425(KGS!@#$%为LM Hash加密时DES加密的硬编码，转换为16进制)<br> 6C734076E7B827BFAAD3B435B51404EE(将两组des加密后的密文组合，得到LM Hash)</p>
+<p><strong>如果密码不超过7字节，后面的一半是固定的，都为0，安全性降低，所以被弃用</strong></p>
+<p>2.NTML Hash</p>
+<p>1.hex(16进制编码)<br> 2.Unicode编码 3.md4加密</p>
+<p>admin1-61646d696e31(将明文转换为16进制编码)<br> 61646d696e31-610064006d0069006e003100(ASCII转Unicode)<br> 610064006d0069006e003100-74561893ea1e32f1fab1691c56f6c7a5(md4加密得到NTLM Hash)</p>
+<h4 id="获取Hash"><a href="#获取Hash" class="headerlink" title="获取Hash"></a>获取Hash</h4><p>1.使用卷影副本将SAM文件导出，配合SYSKEY利用mimikatz等工具读获得NTML Hash</p>
+<p>2.使用mimikatz等工具读取lsass.exe进程，获取hash</p>
+<p>3.配合其他漏洞和手法获取net-NTML Hash 4.net-NTML Hash可以使用Responder或Inveigh等工具获取</p>
+<h4 id="破解hash"><a href="#破解hash" class="headerlink" title="破解hash"></a>破解hash</h4><ul>
+<li>LM Hash<br>1.john –format&#x3D;lm hash.txt<br>2.hashcat -m 3000 -a 3 hash.txt</li>
+<li>NTLM Hash<br>1.john –format&#x3D;nt hash.txt<br>2.hashcat -m 1000 -a 3 hash.txt</li>
+<li>Net-NTLMv1<br>1.john –format&#x3D;netntlm hash.txt<br>2.hashcat -m 5500 -a 3 hash.txt</li>
+<li>Net-NTLMv2<br>1.john –format&#x3D;netntlmv2 hash.txt<br>2.hashcat -m 5600 -a 3 hash.txt</li>
+</ul>
+<h1 id="Active-Directory"><a href="#Active-Directory" class="headerlink" title="Active Directory"></a>Active Directory</h1><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>活动目录，简称AD，是一个基于DNS并以树状的数据结构来组成网络服务存储了有关网络对象的信息，并以此作为基础对目录信息进行合乎逻辑的分层组织，让管理员和用户能够轻松的查找和使用这些信息，常用网域都只有一个，在中型或大型网络中，王玉可能有或多个，或是和其他公司或组织的AD相互连接</p>
+<h4 id="AD功能"><a href="#AD功能" class="headerlink" title="AD功能"></a>AD功能</h4><p>服务器及客户端计算机管理</p>
+<p>用户服务</p>
+<p>资源管理</p>
+<p>桌面配置</p>
+<p>应用系统支撑</p>
+<h4 id="存储方式"><a href="#存储方式" class="headerlink" title="存储方式"></a>存储方式</h4><p>ntds.dit是AD中的数据库文件，它被保存在域控制器c:\windows\system32\ntds\NTDS.DIT位置，活动目录数据库文件（ntds.dit）包含有关活动目录域中所有对象的所有消息，其中包含所有域用户和计算机账户的密码哈希值，该文件在所有域控制器之间自动同步，它只能别域管理员访问和修改</p>
+<h4 id="攻击活动目录"><a href="#攻击活动目录" class="headerlink" title="攻击活动目录"></a>攻击活动目录</h4><p>利用常规web渗透进行横向渗透</p>
+<p>常规Dump Hash后进行PTH，循环操作，知道获取Domain Admins</p>
+<p>利用SYSVOL和组策略首选项（GPP）</p>
+<p>MS14-068</p>
+<p>利用VSS卷影副本拷贝ntds.dit</p>
+<p>利用Responder等工具进行ARP</p>
+<p>Netbios和LLMNR命名投毒</p>
+<p>kerberoast（破解Ticket）</p>
+<p>MS17-010</p>
+<h1 id="Kerberos"><a href="#Kerberos" class="headerlink" title="Kerberos"></a>Kerberos</h1><h1 id="SMB"><a href="#SMB" class="headerlink" title="SMB"></a>SMB</h1><p>称为服务器消息块，又叫网络文件共享系统（CIFS）,在Windows2000中，SMB除了基于NBT实现还可以直接通过445端口实现</p>
+<h4 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h4><p>使网络上的机器能共享计算机文件，打印机，串行端口和通讯等资源</p>
+<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>CIFS消息一般使用NetBIPS或TCP协议发送，分别使用不同端口139或445，当前倾向于445端口使用</p>
+<ul>
+<li>直接运行在 TCP 上 port 445</li>
+<li>通过使用 NetBIOS API<ul>
+<li>基于 UDP ports 137, 138 &amp; TCP ports 137, 139</li>
+<li>基于一些传统协议，例如 NBF</li>
+</ul>
+</li>
+</ul>
+<h4 id="历史版本"><a href="#历史版本" class="headerlink" title="历史版本"></a>历史版本</h4><p>1.SMB 1.0 没有数字签名功能</p>
+<p>2.SMB 2.0</p>
+<p>3.SMB 2.1</p>
+<p>4.SMB 3.0</p>
+<h1 id="IPC-进程间通信"><a href="#IPC-进程间通信" class="headerlink" title="IPC(进程间通信)"></a>IPC(进程间通信)</h1><h4 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h4><p>指至少两个进程或线程间传送数据或信号的一些技术或方法</p>
+<h4 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h4><p>信息共享：web服务器，通过网页浏览器使用进程键通信来共享web文件（网页等）和多媒体</p>
+<p>加速：维基百科使用通过进程间通信进行交流的多服务器来满足用户的请求</p>
+<p>模块化</p>
+<p>私有权分离</p>
+<h4 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h4><h6 id="IPC"><a href="#IPC" class="headerlink" title="IPC$"></a>IPC$</h6><p>是共享“命名管道”的资源，为了让进程间通信而开放的命名管道，通过提供客信任的用户名和口令，连接双方可以建立安全的通道并以此通道进行加密数据的交换，从而实现对远程计算机的访问，cNT&#x2F;2000开始使用</p>
+<p>IPC$在同一时间内，两个IP之间只允许建立一个连接。</p>
+<p>NT&#x2F;2000在提供了 ipc$ 功能的同时，在初次安装系统时还打开了默认共享，即所有的逻辑共享(c$,d$,e$……)和系统目录winnt或管理员目录(admin$)共享。</p>
+<h5 id="ipc-的使用"><a href="#ipc-的使用" class="headerlink" title="ipc$的使用"></a>ipc$的使用</h5><h6 id="ipc空连接"><a href="#ipc空连接" class="headerlink" title="ipc空连接"></a>ipc空连接</h6><p>对于NT，在默认安全设置下，借助空连接可以列举目标主机上的用户和共享，访问everyone权限的共享，访问小部分注册表等，在Windows server 2000及以后作用更小，因为在Windows 2000和以后版本中默认只有管理员有权从网络访问到注册表</p>
+<h6 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h6><p>建立IPC$空连接：net use \192.168.1.101\ipc$ “” &#x2F;user:”domain\username”</p>
+<p>建立IPC$非空连接：net use \192.168.1.101\ipc$ “password” &#x2F;user:”domain\username”</p>
+<p>删除IPC$连接：net use \192.168.1.101\ipc$ &#x2F;del</p>
+<p>已经建立IPC$连接并且有权限，将目标C盘映射到本地Z盘：net use z: \192.168.1.101\c$</p>
+<p>删除映射：net use z: &#x2F;del</p>
+<p>关闭IPC默认共享：net use ipc$ &#x2F;del</p>
+<p>注：</p>
+<p>1.现在绝大多数的Windows操作系统默认策略不允许来自远程网络验证的空密码，所以IPC空连接已经被废弃。</p>
+<p>2.如果远程服务端未开启139、445端口，无法使用IPC$进行连接。</p>
+<h1 id="NETBIOS"><a href="#NETBIOS" class="headerlink" title="NETBIOS"></a>NETBIOS</h1><h4 id="简介-2"><a href="#简介-2" class="headerlink" title="简介"></a>简介</h4><p>NETBIOS(网络基本输入输出系统)，严格讲不属于网络协议，NETBIOS是应用程序接口(API),早期使用NetBIOS  Frames(NBF)协议进行运作,是一种非路由网络协议，位于传输层；后期NetBIOS over  TCP&#x2F;IP（缩写为NBT、NetBT）出现，使之可以连接到TCP&#x2F;IP，是一种网络协议，位于会话层。基于NETBIOS协议广播获得计算机名称——解析为相应IP地址，WindowsNT以后的所有操作系统上均可用，不支持IPV6</p>
+<h4 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h4><p>NETBIOS提供三种服务</p>
+<ul>
+<li><p>NetBIOS-NS（名称服务）：为了启动会话和分发数据报，程序需要使用Name Server注册NETBIOS名称，可以告诉其他应用程序提供什么服务，默认监听UDP137端口，也可以使用TCP 137端口。</p>
+</li>
+<li><p>Datagram distribution service（数据报分发服务）：无连接，负责错误检测和恢复，默认在UDP 138端口。</p>
+</li>
+<li><p>Session Server（会话服务）：允许两台计算机建立连接，默认在TCP 139端口。</p>
+</li>
+</ul>
+<p><strong>利用NETBIOS发现主机</strong></p>
+<p>1.nbtstat(Windows自带命令)</p>
+<p>获取目标主机MAC地址</p>
+<p>nbtstat -A 192.168.100.200</p>
+<p>2.nbtscan</p>
+<p>扫描指定网段的主机名和网络开放共享</p>
+<p>nbtscan.exe 192.168.100.1&#x2F;24</p>
+<p>SHARING表示开放，DC 表示可能是域控</p>
+<h1 id="LLMNR"><a href="#LLMNR" class="headerlink" title="LLMNR"></a>LLMNR</h1><h4 id="简介-3"><a href="#简介-3" class="headerlink" title="简介"></a>简介</h4><p>LLMNR是链路本地多播名称解析，当局域网中的DNS服务器不可用时，可以使用LLMNR解析本地网段上机器名称，只有WindowsVista和更高版本才支持LLMNR，支持IPV6</p>
+<h4 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h4><p>通过UDP发送到组播地址224.0.0.252:5355，查询主机名对应的IP，使用的是DNS格式数据包，数据包会被限制在本地子网中。</p>
+<p>本地子网中所有支持LLMNR的主机在受到查询请求时，会对比自己的主机名是否相同，不同就丢弃，相同就发送包含自己IP的单播信息给查询主机。</p>
+<ol>
+<li>主机在内部名称缓存中查询名称</li>
+<li>在主DNS查询名称</li>
+<li>在备用DNS查询名称</li>
+<li>使用LLMNR查询名称</li>
+</ol>
+<h1 id="WMI"><a href="#WMI" class="headerlink" title="WMI"></a>WMI</h1><p>WMI(Windows管理规范)，由一系列对Windows Driver  Model的扩展组成，它通过仪器组件提供信息和通知，提供了一个操作系统的接口。在渗透测试过程中，攻击者往往使用脚本通过WMI接口完成对Windows操作系统的操作，远程WMI连接通过DCOM进行。例如：WMIC、Invoke-WmiCommand、Invoke-WMIMethod等。另一种方法是使用Windows远程管理（WinRM）。</p>
+<h1 id="Windows-Access-Token"><a href="#Windows-Access-Token" class="headerlink" title="Windows Access Token"></a>Windows Access Token</h1><h4 id="简介-4"><a href="#简介-4" class="headerlink" title="简介"></a>简介</h4><p>Windows Access Token(访问令牌)，它是一个描述进程或者线程安全上下文的一个对象。不同的用户登录计算机后，  都会生成一个Access  Token，这个Token在用户创建进程或者线程时会被使用，不断的拷贝，这也就解释了A用户创建一个进程而该进程没有B用户的权限。当用户注销后，系统将会使主令牌切换为模拟令牌，不会将令牌清 除，只有在重启机器后才会清除</p>
+<p>Access Token分为两种(主令牌、模拟令牌)</p>
+<h4 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h4><ul>
+<li>用户帐户的安全标识符(SID)</li>
+<li>用户所属的组的SID</li>
+<li>用于标识当前登录会话的登录SID</li>
+<li>用户或用户组所拥有的权限列表</li>
+<li>所有者SID</li>
+<li>主要组的SID</li>
+<li>访问控制列表</li>
+<li>访问令牌的来源</li>
+<li>令牌是主要令牌还是模拟令牌</li>
+<li>限制SID的可选列表</li>
+<li>目前的模拟等级</li>
+<li>其他统计数据</li>
+</ul>
+<h4 id="SID"><a href="#SID" class="headerlink" title="SID"></a>SID</h4><p>安全标识符是一个唯一的字符串，它可以代表一个账户、一个用户 组、或者是一次登录。通常它还有一个SID固定列表，例如 Everyone这种已经内置的账户，默认拥有固定的SID。</p>
+<p>SID表现形式:</p>
+<p>域SID-用户ID<br>计算机SID-用户ID</p>
+<h4 id="Windows-Access-Token产生过程"><a href="#Windows-Access-Token产生过程" class="headerlink" title="Windows Access Token产生过程"></a>Windows Access Token产生过程</h4><p>每个进程创建时都会根据登录会话权限由LSA(Local Security Authority)分配一个Token(如果CreaetProcess时自己指定了 Token, LSA会用该Token， 否则就用父进程Token的一份拷贝。</p>
+<h1 id="windows网络认证"><a href="#windows网络认证" class="headerlink" title="windows网络认证"></a>windows网络认证</h1><h2 id="1-工作组"><a href="#1-工作组" class="headerlink" title="1.工作组"></a>1.工作组</h2><h4 id="简介-5"><a href="#简介-5" class="headerlink" title="简介"></a>简介</h4><p>工作组是指数台计算机在同一个内网中，在逻辑上都属于工作组，但是在工作组中的机器之间相互没有信任关系，每台机器的账号密码只是保存在自己的SAM文件中。那就意味着如果需要共享资源只能新建一个账号并指定相关资源授予该账号权限才可以完成共享。早期利用SMB协议在内网中传输明文口令，后为了安全出现LM Challenge&#x2F;Response 验证机制，再之后LM Challenge&#x2F;Response 验证机制因为安全性问题，从Windows  Vista &#x2F; Server 2008开始LM就被弃用，改用Windows NT挑战&#x2F;响应验证机制，常被人称为NTLM，现在被更新到NTLMv2</p>
+<h4 id="历史版本-1"><a href="#历史版本-1" class="headerlink" title="历史版本"></a>历史版本</h4><p>NTLMv1：服务器通过发送一个8字节的随机数（挑战）来验证客户端，客户端返回两个24字节Hash进行计算并返回计算结果。<br> NTLMv2：它通过加强协议来抵御许多欺骗攻击，并增加服务器向客户端进行身份验证的能力，从而增强了NTLM的安全性。服务器通过发送一个16字节的HMAC – MD5随机数（挑战）来验证客户端。 ####工作流程 Client(客户端)、Server(服务端)</p>
+<ul>
+<li>[1] 协商<br>Clint向Server发送消息，确定协议版本</li>
+<li>[2] 质询<br>Client向Server发送用户名消息作为请求<br>Server收到请求，验证是否存在Client发来的用户名，如果存在，生成16位的随机数(Challenge)发送给Cilent，并使用SAM中查询用户名对应的NTLM Hash加密Chanllenge，生成Net-NTLM Hash存放在内存中。<br>Client使用发送的用户名对应的NTLM Hash加密Challenge，将结果(Response)发送给Server</li>
+<li>[3] 验证<br>Server收到Client发送的Response，将接收的Response与Net-NTLM Hash进行比较，如果相同，则认证通过。<br>注：每次生成的16字节的Challenge都不同，保证的安全性。</li>
+</ul>
+<h1 id="本地认证流程"><a href="#本地认证流程" class="headerlink" title="本地认证流程"></a>本地认证流程</h1><ul>
+<li>Windows Logon Process(即 winlogon.exe)，Winlogon 是负责处理安全相关的用户交互界面的组件。Winlogon的工作包括加载其他用户身份安全组件、提供图形化的登录界面，以及创建用户会话。</li>
+<li>LSASS(本地安全认证子系统服务)用于微软Windows系统的安全机制。它负责Windows系统安全策略。它负责用户在本地验证或远程登陆时验证用户身份，管理用户密码变更，并产生访问日志。</li>
+</ul>
+<p>用户注销、重启、锁屏后，操作系统会让winlogon显示图形化登录界面，也就是输入框，接收域名、用户名、密码后交给lsass进程，将明文密码加密成NTLM Hash，对SAM数据库比较认证，相同则认证成功。</p>
+<h1 id="内网渗透常用端口"><a href="#内网渗透常用端口" class="headerlink" title="内网渗透常用端口"></a>内网渗透常用端口</h1><ul>
+<li>53<br>DNS服务，在使用中需要用到TCP&#x2F;UDP 53端口，AD域的核心就是DNS服务器，AD通过DNS服务器定位资源</li>
+<li>88<br>Kerberos服务，在使用中需要用到TCP&#x2F;UDP 88端口，Kerberos密钥分发中心(KDC) 在该端口上侦听Ticket请求</li>
+<li>135<br>135端口主要用于使用RPC协议并提供DCOM服务。</li>
+<li>137<br>NetBIOS-NS(名称服务)，在使用中需要用到TCP&#x2F;UDP 137端口</li>
+<li>139<br>Session Server(会话服务),在使用中需要用到TCP&#x2F;UDP 139端口，允许两台计算机建立连接</li>
+<li>389<br>LDAP服务(轻量级目录访问协议)，在使用中需要用到TCP&#x2F;UDP 389端口，如果需要使用SSL，需要使用636端口，</li>
+<li>445<br>主要用于共享文件夹或共享打印，存在较多漏洞，如MS08-067、MS17-010</li>
+<li>3268 Global Catalog(全局编录服务器)，如果需要使用SSL，需要用到3269端口，主要用于用户登录时，负责验证用户身份的域控制器需要通过防火墙，来向“全局编录”查询用户所隶属的通用组</li>
+</ul>
 
                 
             </div>
@@ -519,7 +631,7 @@ dns劫持：实验环境：Windows10(靶机) 192.168.">
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://nebulce.github.io/NebuIce.github.io/NebuIce.github.io/2022/03/02/C/">https://nebulce.github.io/NebuIce.github.io/NebuIce.github.io/2022/03/02/C/</a>
+                    <a href="https://nebulce.github.io/NebuIce.github.io/NebuIce.github.io/2022/03/03/Common-intranet-vocabulary/">https://nebulce.github.io/NebuIce.github.io/NebuIce.github.io/2022/03/03/Common-intranet-vocabulary/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -733,13 +845,13 @@ dns劫持：实验环境：Windows10(靶机) 192.168.">
                 <i class="far fa-dot-circle"></i>&nbsp;Current
             </div>
             <div class="card">
-                <a href="/NebuIce.github.io/2022/03/02/C/">
+                <a href="/NebuIce.github.io/2022/03/03/Common-intranet-vocabulary/">
                     <div class="card-image">
                         
                         
-                        <img src="/NebuIce.github.io/medias/featureimages/19.jpg" class="responsive-img" alt="C">
+                        <img src="/NebuIce.github.io/medias/featureimages/23.jpg" class="responsive-img" alt="内网常见词汇学习">
                         
-                        <span class="card-title">C</span>
+                        <span class="card-title">内网常见词汇学习</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -750,7 +862,7 @@ dns劫持：实验环境：Windows10(靶机) 192.168.">
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-02
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-03
                             </span>
                         <span class="publish-author">
                             
@@ -771,13 +883,13 @@ dns劫持：实验环境：Windows10(靶机) 192.168.">
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/NebuIce.github.io/2022/03/02/PHP/">
+                <a href="/NebuIce.github.io/2022/03/02/DNS%E5%8A%AB%E6%8C%81/">
                     <div class="card-image">
                         
                         
-                        <img src="/NebuIce.github.io/medias/featureimages/23.jpg" class="responsive-img" alt="PHP篇">
+                        <img src="/NebuIce.github.io/medias/featureimages/13.jpg" class="responsive-img" alt="内网DNS劫持">
                         
-                        <span class="card-title">PHP篇</span>
+                        <span class="card-title">内网DNS劫持</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -797,14 +909,6 @@ dns劫持：实验环境：Windows10(靶机) 192.168.">
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/NebuIce.github.io/tags/PHP/">
-                        <span class="chip bg-color">PHP</span>
-                    </a>
-                    
                 </div>
                 
             </div>
